@@ -4,10 +4,51 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>native-suspense</title>
+    <title>Native suspense</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <!-- chrome://flags/#enable-experimental-web-platform-features -->
+    <!-- https://github.com/GoogleChromeLabs/web-perf-demos/blob/main/patching-demos/index.html -->
+    <!-- <div id="app"></div> -->
+    <!-- <script type="module" src="/src/main.ts"></script> -->
+    <header>
+      <h1>Native suspense</h1>
+      <p>Text</p>
+    </header>
+    <main>
+      <section>
+        <h2>Section 1</h2>
+        <?marker name="section1"?>
+      </section>
+      <!-- doesn't work -->
+      <section marker="section2">
+        <h2>Section 2</h2>
+        <?marker>
+      </section>
+      <section>
+        <h2>Section 3</h2>
+        <?start name="section3">
+        <marquee direction="right" scrollamount="16">Loading</marquee>
+        <?end>
+      </section>
+      <section>
+        <h2>Section 4</h2>
+        <?start name="section4outer"> <?start name="section4inner">
+        <marquee direction="right" scrollamount="16">Loading inner</marquee>
+        <?end>
+        <marquee direction="right" scrollamount="16">Loading outer</marquee>
+        <?end>
+      </section>
+      <hr />
+      <template for="section1">Rendered content for section 1</template>
+      <template for="section2">Rendered content for section 2</template>
+      <template for="section3">Rendered content for section 3</template>
+      <template for="section4outer"
+        >Rendered content for section 4 outer</template
+      >
+      <template for="section4inner"
+        >Rendered content for section 4 inner</template
+      >
+    </main>
   </body>
 </html>
