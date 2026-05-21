@@ -10,7 +10,6 @@
     <!-- chrome://flags/#enable-experimental-web-platform-features -->
     <!-- https://github.com/GoogleChromeLabs/web-perf-demos/blob/main/patching-demos/index.html -->
     <!-- <div id="app"></div> -->
-    <!-- <script type="module" src="/src/main.ts"></script> -->
     <header>
       <h1>Native suspense</h1>
       <p>Text</p>
@@ -39,16 +38,39 @@
         <marquee direction="right" scrollamount="16">Loading outer</marquee>
         <?end>
       </section>
-      <hr />
-      <template for="section1">Rendered content for section 1</template>
-      <template for="section2">Rendered content for section 2</template>
-      <template for="section3">Rendered content for section 3</template>
-      <template for="section4outer"
-        >Rendered content for section 4 outer</template
-      >
-      <template for="section4inner"
-        >Rendered content for section 4 inner</template
-      >
+      <!-- <section id="section5">
+        <h2>Section 5</h2>
+        <?start name="section5">
+        <marquee direction="right" scrollamount="16">Loading</marquee>
+        <?end>
+      </section> -->
+      <!-- <section id="section6">
+        <h2>Section 6</h2>
+        <?start name="section6">
+        <marquee direction="right" scrollamount="16">Loading</marquee>
+        <?end>
+      </section> -->
+      <section>
+        <h2>Section 6</h2>
+        <?start name="section6">
+        <marquee direction="right" scrollamount="16">Loading</marquee>
+        <?end>
+      </section>
+      <hr id="seperator" />
+      <template for="section1">Content for section 1</template>
+      <template for="section2">Content for section 2</template>
+      <template for="section3">Content for section 3</template>
+      <template for="section4outer">Content for section 4 outer</template>
+      <template for="section4inner">Content for section 4 inner</template>
+      <template data-target="section5">Content for section 5</template>
+      <!-- <template for="section6">Content for section 6</template> -->
+      <section>
+        <h2>Controls</h2>
+        <button id="section6-button" type="button">
+          Load content for section6
+        </button>
+      </section>
     </main>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
