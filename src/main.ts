@@ -43,15 +43,42 @@ const parent = document.querySelector<HTMLElement>("main");
 // });
 
 {
+  const button4 = document.querySelector<HTMLButtonElement>("#section4-button");
+  button4?.addEventListener("click", async () => {
+    if (!parent) {
+      return;
+    }
+
+    // @ts-expect-error too recent an addition
+    const writer = parent.streamAppendHTMLUnsafe().getWriter();
+
+    for (const index of Array.from({ length: 5 }, (_, index) => index + 1)) {
+      await writer.write(`
+        <template for="section4">
+          <div>Content for section 4 - ${index}</div>
+          <?marker name="section4"><!-- needed for repeated insertion -->
+        </template>
+      `);
+    }
+
+    await writer.close();
+  });
+}
+
+{
   const button5 = document.querySelector<HTMLButtonElement>("#section5-button");
   button5?.addEventListener("click", async () => {
+    if (!parent) {
+      return;
+    }
+
     // @ts-expect-error too recent an addition
     const writer = parent.streamAppendHTMLUnsafe().getWriter();
     await writer.write(`
-    <template for="section5-inner">
-      Content for section 5 inner
-    </template>
-  `);
+      <template for="section5-inner">
+        Content for section 5 inner
+      </template>
+    `);
 
     await writer.close();
   });
@@ -60,13 +87,17 @@ const parent = document.querySelector<HTMLElement>("main");
 {
   const button6 = document.querySelector<HTMLButtonElement>("#section6-button");
   button6?.addEventListener("click", async () => {
+    if (!parent) {
+      return;
+    }
+
     // @ts-expect-error too recent an addition
     const writer = parent.streamAppendHTMLUnsafe().getWriter();
     await writer.write(`
-    <template for="section6">
-      Content for section 6
-    </template>
-  `);
+      <template for="section6">
+        Content for section 6
+      </template>
+    `);
 
     await writer.close();
   });
@@ -85,7 +116,7 @@ const parent = document.querySelector<HTMLElement>("main");
     await writer.write(`
       <template for="section7">
         <li>${faker.person.firstName()}</li>
-        <?marker name="section7"> <!-- needed for repeated insertion -->
+        <?marker name="section7"><!-- needed for repeated insertion -->
       </template>
     `);
 

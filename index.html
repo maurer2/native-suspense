@@ -32,10 +32,8 @@
       </section>
       <section>
         <h2>Section 4</h2>
-        <?start name="section4outer"> <?start name="section4inner">
-        <marquee direction="right" scrollamount="16">Loading inner</marquee>
-        <?end>
-        <marquee direction="right" scrollamount="16">Loading outer</marquee>
+        <?start name="section4">
+        <marquee direction="right" scrollamount="16">Loading</marquee>
         <?end>
       </section>
       <section>
@@ -67,12 +65,15 @@
       <template for="section1">Content for section 1</template>
       <template for="section2">Content for section 2</template>
       <template for="section3">Content for section 3</template>
-      <template for="section4outer">Content for section 4 outer</template>
-      <template for="section4inner">Content for section 4 inner</template>
+      <!-- <template for="section4">Content for section 4 1</template>
+      <template for="section4">Content for section 4 2</template> -->
       <template data-target="section5">Content for section 5</template>
       <!-- <template for="section6">Content for section 6</template> -->
       <section>
         <h2>Controls</h2>
+        <button id="section4-button" type="button">
+          Load content for section4
+        </button>
         <button id="section5-button" type="button">
           Load content for section5
         </button>
