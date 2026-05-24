@@ -64,7 +64,7 @@ button6?.addEventListener("click", async () => {
       return;
     }
 
-    // @ts-expect-error experimental API
+    // @ts-expect-error too recent an addition
     const writer = parent.streamPrependHTMLUnsafe().getWriter();
     // names.push(faker.person.firstName());
 
