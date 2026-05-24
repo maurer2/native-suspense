@@ -1,12 +1,14 @@
+import { faker } from "@faker-js/faker";
+
 // import "./style.css";
 
 // const section5Template = document.querySelector<HTMLElement>(
 //   '[data-target="section5"]',
 // )!;
 // const button5 = document.querySelector<HTMLButtonElement>("#section5-button")!;
-const button6 = document.querySelector<HTMLButtonElement>("#section6-button")!;
+const button6 = document.querySelector<HTMLButtonElement>("#section6-button");
 // const seperator = document.querySelector<HTMLButtonElement>("#seperator")!;
-const parent = document.querySelector<HTMLButtonElement>("main")!;
+const parent = document.querySelector<HTMLElement>("main");
 
 // adding "for"-dynamically doesn't work.
 // button5.addEventListener("click", () => {
@@ -36,13 +38,12 @@ const parent = document.querySelector<HTMLButtonElement>("main")!;
 //   const newTemplateElement = document.createElement("template");
 
 //   newTemplateElement.setAttribute("for", "section6");
-
 //   newTemplateElement.innerHTML = "Content for section 6";
 //   // seperator.insertAdjacentElement("beforebegin", newTemplateElement);
 //   parent.insertAdjacentElement("afterbegin", newTemplateElement);
 // });
 
-button6.addEventListener("click", async () => {
+button6?.addEventListener("click", async () => {
   // @ts-expect-error too recent an addition
   const writer = parent.streamPrependHTMLUnsafe().getWriter();
   await writer.write(`
@@ -53,3 +54,27 @@ button6.addEventListener("click", async () => {
 
   await writer.close();
 });
+
+{
+  const button7 = document.querySelector<HTMLButtonElement>("#section7-button");
+  // const names: string[] = [];
+
+  button7?.addEventListener("click", async () => {
+    if (!parent) {
+      return;
+    }
+
+    // @ts-expect-error experimental API
+    const writer = parent.streamPrependHTMLUnsafe().getWriter();
+    // names.push(faker.person.firstName());
+
+    await writer.write(`
+      <template for="section7">
+        <li>${faker.person.firstName()}</li>
+        <?start name="section7"> <!-- needed for repeated insertion -->
+      </template>
+    `);
+
+    await writer.close();
+  });
+}
