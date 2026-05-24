@@ -6,7 +6,6 @@ import { faker } from "@faker-js/faker";
 //   '[data-target="section5"]',
 // )!;
 // const button5 = document.querySelector<HTMLButtonElement>("#section5-button")!;
-const button6 = document.querySelector<HTMLButtonElement>("#section6-button");
 // const seperator = document.querySelector<HTMLButtonElement>("#seperator")!;
 const parent = document.querySelector<HTMLElement>("main");
 
@@ -43,35 +42,50 @@ const parent = document.querySelector<HTMLElement>("main");
 //   parent.insertAdjacentElement("afterbegin", newTemplateElement);
 // });
 
-button6?.addEventListener("click", async () => {
-  // @ts-expect-error too recent an addition
-  const writer = parent.streamPrependHTMLUnsafe().getWriter();
-  await writer.write(`
+{
+  const button5 = document.querySelector<HTMLButtonElement>("#section5-button");
+  button5?.addEventListener("click", async () => {
+    // @ts-expect-error too recent an addition
+    const writer = parent.streamAppendHTMLUnsafe().getWriter();
+    await writer.write(`
+    <template for="section5-inner">
+      Content for section 5 inner
+    </template>
+  `);
+
+    await writer.close();
+  });
+}
+
+{
+  const button6 = document.querySelector<HTMLButtonElement>("#section6-button");
+  button6?.addEventListener("click", async () => {
+    // @ts-expect-error too recent an addition
+    const writer = parent.streamAppendHTMLUnsafe().getWriter();
+    await writer.write(`
     <template for="section6">
       Content for section 6
     </template>
   `);
 
-  await writer.close();
-});
+    await writer.close();
+  });
+}
 
 {
   const button7 = document.querySelector<HTMLButtonElement>("#section7-button");
-  // const names: string[] = [];
-
   button7?.addEventListener("click", async () => {
     if (!parent) {
       return;
     }
 
     // @ts-expect-error too recent an addition
-    const writer = parent.streamPrependHTMLUnsafe().getWriter();
+    const writer = parent.streamAppendHTMLUnsafe().getWriter();
     // names.push(faker.person.firstName());
-
     await writer.write(`
       <template for="section7">
         <li>${faker.person.firstName()}</li>
-        <?start name="section7"> <!-- needed for repeated insertion -->
+        <?marker name="section7"> <!-- needed for repeated insertion -->
       </template>
     `);
 

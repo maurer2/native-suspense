@@ -38,18 +38,17 @@
         <marquee direction="right" scrollamount="16">Loading outer</marquee>
         <?end>
       </section>
-      <!-- <section id="section5">
+      <section>
         <h2>Section 5</h2>
-        <?start name="section5">
-        <marquee direction="right" scrollamount="16">Loading</marquee>
+        <?start name="section5-outer">
+        <div>
+          <?start name="section5-inner">
+          <marquee direction="right" scrollamount="16">Loading inner</marquee
+          ><?end>
+        </div>
+        <div>Static stuff</div>
         <?end>
-      </section> -->
-      <!-- <section id="section6">
-        <h2>Section 6</h2>
-        <?start name="section6">
-        <marquee direction="right" scrollamount="16">Loading</marquee>
-        <?end>
-      </section> -->
+      </section>
       <section>
         <h2>Section 6</h2>
         <?start name="section6">
@@ -74,12 +73,12 @@
       <!-- <template for="section6">Content for section 6</template> -->
       <section>
         <h2>Controls</h2>
+        <button id="section5-button" type="button">
+          Load content for section5
+        </button>
         <button id="section6-button" type="button">
           Load content for section6
         </button>
-      </section>
-      <section>
-        <h2>Controls</h2>
         <button id="section7-button" type="button">
           Add (more) content to section7
         </button>
